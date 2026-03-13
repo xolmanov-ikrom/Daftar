@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="uz" data-lang="uz">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta name="theme-color" content="#111a10"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<title>Daftar v11</title>
+<link rel="manifest" href="manifest.json"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body data-theme="earthy">
+
+<!-- SPLASH -->
+<div id="splash">
+  <canvas id="sp-canvas"></canvas>
+  <div class="sp-inner">
+    <div class="sp-logo"><svg viewBox="0 0 44 44" fill="none" class="sp-svg"><rect x="3" y="3" width="38" height="38" rx="10" stroke="currentColor" stroke-width="1.5"/><path d="M11 14h22M11 20h14M11 26h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="34" cy="30" r="8" fill="var(--bg2)" stroke="currentColor" stroke-width="1.5"/><path d="M31 30l2 2 4-3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h1 class="sp-title">Daftar</h1>
+    <p class="sp-sub" id="sp-sub">Shaxsiy kundaligingiz</p>
+    <div class="sp-loader"><div class="sp-prog"></div></div>
+    <div class="sp-ver">v11 · AI · Audio · Heatmap · Focus · Templates</div>
+  </div>
+</div>
+
+<!-- ONBOARDING -->
+<div id="onboard" class="hidden">
+  <div class="ob-wrap">
+    <button class="ob-skip" onclick="finishOnboard()">Skip</button>
+    <div class="ob-slides">
+      <div class="ob-slide active" id="obs-0">
+        <div class="ob-illo"><svg viewBox="0 0 120 120" fill="none" width="140"><rect x="20" y="20" width="80" height="80" rx="16" fill="var(--bg3)" stroke="var(--border2)" stroke-width="1.5"/><path d="M35 45h50M35 57h30M35 69h40" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/><circle cx="88" cy="88" r="18" fill="var(--accent3)" stroke="var(--accent2)" stroke-width="1.5"/><path d="M82 88l4 4 8-6" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2 class="ob-t" id="ob-t0"></h2><p class="ob-s" id="ob-s0"></p>
+      </div>
+      <div class="ob-slide" id="obs-1">
+        <div class="ob-illo"><svg viewBox="0 0 120 120" fill="none" width="140"><circle cx="60" cy="50" r="30" fill="var(--bg3)" stroke="var(--border2)" stroke-width="1.5"/><text x="60" y="58" text-anchor="middle" font-size="28">🤖</text><path d="M25 90h70" stroke="var(--border2)" stroke-width="1.5" stroke-linecap="round"/><path d="M33 90v-10M46 90v-18M59 90v-24M72 90v-14M85 90v-8" stroke="var(--gold)" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+        <h2 class="ob-t" id="ob-t1"></h2><p class="ob-s" id="ob-s1"></p>
+      </div>
+      <div class="ob-slide" id="obs-2">
+        <div class="ob-illo"><svg viewBox="0 0 120 120" fill="none" width="140"><rect x="15" y="30" width="90" height="60" rx="12" fill="var(--bg3)" stroke="var(--border2)" stroke-width="1.5"/><text x="60" y="68" text-anchor="middle" font-size="32">☁️</text><circle cx="90" cy="25" r="14" fill="var(--gold2)" stroke="var(--gold)" stroke-width="1.5"/><path d="M84 25l3 3 6-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h2 class="ob-t" id="ob-t2"></h2><p class="ob-s" id="ob-s2"></p>
+      </div>
+    </div>
+    <div class="ob-dots"><span class="od active" onclick="goSlide(0)"></span><span class="od" onclick="goSlide(1)"></span><span class="od" onclick="goSlide(2)"></span></div>
+    <button class="ob-next" id="ob-next" onclick="nextSlide()">Keyingi →</button>
+  </div>
+</div>
+
+<!-- AUTH -->
+<div id="auth" class="hidden">
+  <div class="auth-bg"><div class="ab1"></div><div class="ab2"></div></div>
+  <div class="auth-wrap"><div class="auth-card">
+    <div class="ac-top">
+      <div class="ac-logo"><svg viewBox="0 0 28 28" fill="none" width="20"><rect x="2" y="2" width="24" height="24" rx="6" stroke="currentColor" stroke-width="1.5"/><path d="M7 9h14M7 14h9M7 19h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <span class="ac-brand">Daftar</span>
+      <div class="ac-lang">
+        <button class="lng active" onclick="setLang('uz')">UZ</button>
+        <button class="lng" onclick="setLang('ru')">RU</button>
+        <button class="lng" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+    <div class="auth-tabs"><button class="atb active" id="atb-l" onclick="switchTab('l')" data-i="login"></button><button class="atb" id="atb-r" onclick="switchTab('r')" data-i="newAcc"></button></div>
+    <div id="fl" class="aform">
+      <div id="ql" class="ql"></div>
+      <div class="af"><label class="afl" data-i="username"></label><div class="afb"><span class="afp">@</span><input id="lu" class="afi" type="text" autocapitalize="none"/></div></div>
+      <div class="af"><label class="afl" data-i="password"></label><div class="afb"><input id="lp" class="afi" type="password"/><button class="eye" onclick="toggleEye('lp',this)">👁</button></div></div>
+      <div class="aerr hidden" id="lerr"></div>
+      <button class="asub" id="lbtn" onclick="doLogin()"><span id="ltxt" data-i="loginBtn"></span><span id="lspin" class="spin hidden"></span></button>
+      <p class="aalt"><span data-i="noAcc"></span> <button class="alink" onclick="switchTab('r')" data-i="signUp"></button></p>
+    </div>
+    <div id="fr" class="aform hidden">
+      <div class="af"><label class="afl" data-i="username"></label><div class="afb"><span class="afp">@</span><input id="ru" class="afi" type="text" autocapitalize="none" oninput="chkU()"/></div><div class="ahint" id="ruh"></div></div>
+      <div class="af"><label class="afl" data-i="name"></label><div class="afb"><input id="rn" class="afi" type="text"/></div></div>
+      <div class="af"><label class="afl" data-i="password"></label><div class="afb"><input id="rp" class="afi" type="password" oninput="chkS()"/><button class="eye" onclick="toggleEye('rp',this)">👁</button></div><div class="sbar"><div id="sfill" class="sfill"></div></div><div id="slbl" class="slbl"></div></div>
+      <div class="af"><label class="afl" data-i="confirmPass"></label><div class="afb"><input id="rp2" class="afi" type="password"/></div></div>
+      <div class="enc-note" data-i="encNote"></div>
+      <div class="aerr hidden" id="rerr"></div>
+      <button class="asub" id="rbtn" onclick="doReg()"><span id="rtxt" data-i="regBtn"></span><span id="rspin" class="spin hidden"></span></button>
+      <p class="aalt"><span data-i="hasAcc"></span> <button class="alink" onclick="switchTab('l')" data-i="signIn"></button></p>
+    </div>
+  </div></div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+  <header class="hdr">
+    <button id="hbback" class="hico hidden" onclick="goBack()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+    <div class="hctr"><span class="htit" id="htit">Daftar</span><span class="hsub" id="hsub"></span></div>
+    <div class="hright" id="hright-home">
+      <button class="hico" onclick="openAdvSearch()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
+      <button class="hico" onclick="showThemePanel()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></button>
+    </div>
+    <div class="hright hidden" id="hright-write">
+      <button class="hico" onclick="openTemplates()" title="Templates">📋</button>
+      <button class="hico" onclick="openVoicePanel()" title="Voice">🎙️</button>
+      <button class="hico" onclick="openAIPanel()" title="AI">🤖</button>
+      <button class="hico" onclick="toggleFocus()" id="hb-focus" title="Focus">🎯</button>
+      <button class="hico" onclick="togglePreview()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></button>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <section id="sc-home" class="sc active">
+    <div class="home-hero">
+      <div><div class="hh-greet" id="hh-greet"></div><div class="hh-date" id="hh-date"></div></div>
+      <div class="hh-right"><div class="hh-streak" id="hh-streak" style="display:none"></div><div class="hh-av" id="hh-av" onclick="openScreen('settings')"></div></div>
+    </div>
+    <div class="goal-bar"><div class="gb-top"><span class="gb-lbl" id="gb-lbl"></span><span class="gb-val" id="gb-val"></span></div><div class="gb-track"><div class="gb-fill" id="gb-fill"></div></div></div>
+    <div class="mood-strip"><div class="ms-lbl" id="ms-lbl"></div><div class="ms-row">
+      <button class="mb" data-v="5" onclick="setTMood(5,this)"><span>😄</span><small id="m5l"></small></button>
+      <button class="mb" data-v="4" onclick="setTMood(4,this)"><span>🙂</span><small id="m4l"></small></button>
+      <button class="mb" data-v="3" onclick="setTMood(3,this)"><span>😐</span><small id="m3l"></small></button>
+      <button class="mb" data-v="2" onclick="setTMood(2,this)"><span>😔</span><small id="m2l"></small></button>
+      <button class="mb" data-v="1" onclick="setTMood(1,this)"><span>😢</span><small id="m1l"></small></button>
+    </div></div>
+    <div class="vtabs">
+      <button class="vt active" id="vt-list" onclick="setView('list',this)">☰ <span id="vt-list-lbl"></span></button>
+      <button class="vt" id="vt-cal" onclick="setView('cal',this)">📅 <span id="vt-cal-lbl"></span></button>
+      <button class="vt" id="vt-mood" onclick="setView('mood',this)">💙 <span id="vt-mood-lbl"></span></button>
+      <button class="vt" id="vt-secret" onclick="setView('secret',this)">🔒 <span id="vt-secret-lbl"></span></button>
+    </div>
+    <div class="fpills" id="fpills">
+      <button class="fp active" id="fp-all" onclick="setFil('all',this)"></button>
+      <button class="fp" id="fp-pin" onclick="setFil('pinned',this)">📌</button>
+      <button class="fp" id="fp-star" onclick="setFil('starred',this)">★</button>
+      <button class="fp" id="fp-sched" onclick="setFil('scheduled',this)">🕐 <span id="fp-sched-lbl"></span></button>
+    </div>
+    <div id="view-list"><div id="ecards" class="ecards"></div></div>
+    <div id="view-cal" class="hidden"><div class="cal-wrap" id="cal-wrap"></div></div>
+    <div id="view-mood" class="hidden"><div id="mood-chart-wrap" class="mood-chart-wrap"></div></div>
+    <div id="view-secret" class="hidden"><div id="secret-cards" class="ecards"></div></div>
+  </section>
+
+  <!-- WRITE -->
+  <section id="sc-write" class="sc">
+    <div class="draft-badge hidden" id="dbadge" data-i="draft"></div>
+    <div id="wp-editor" class="wp">
+      <div class="wp-top">
+        <div class="wp-date-row">
+          <span class="wp-date" id="wp-date"></span>
+          <button class="sched-chip" id="sched-chip" onclick="openScheduler()">🕐 <span id="sched-chip-lbl" data-i="schedDate"></span></button>
+          <div class="write-timer"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span id="wt-display">0:00</span></div>
+        </div>
+        <div class="wp-ctrl">
+          <select id="wcat" class="wsel"></select>
+          <button class="wico" id="wstar" onclick="togStar()">☆</button>
+          <button class="wico" id="wpin" onclick="togPin()">📌</button>
+          <button class="wico" id="wlock" onclick="togLock()">🔓</button>
+        </div>
+      </div>
+      <div class="wp-mood"><span class="wml" id="wml"></span><div class="wmoods">
+        <button class="wmb" data-v="5" onclick="setWM(5,this)">😄</button>
+        <button class="wmb" data-v="4" onclick="setWM(4,this)">🙂</button>
+        <button class="wmb" data-v="3" onclick="setWM(3,this)">😐</button>
+        <button class="wmb" data-v="2" onclick="setWM(2,this)">😔</button>
+        <button class="wmb" data-v="1" onclick="setWM(1,this)">😢</button>
+      </div></div>
+      <div class="wp-div"></div>
+      <input id="wtit" class="wtit" maxlength="100" oninput="autoDraft()"/>
+      
+      <div class="color-label-strip" id="color-strip">
+        <span style="font-size:10px;color:var(--text3);margin-right:3px">🎨</span>
+        <span class="cl-dot" style="background:#e05050" data-lbl="r" onclick="setColorLabel('r',this)"></span>
+        <span class="cl-dot" style="background:#e08030" data-lbl="o" onclick="setColorLabel('o',this)"></span>
+        <span class="cl-dot" style="background:#c8a840" data-lbl="y" onclick="setColorLabel('y',this)"></span>
+        <span class="cl-dot" style="background:#50a060" data-lbl="g" onclick="setColorLabel('g',this)"></span>
+        <span class="cl-dot" style="background:#4080c0" data-lbl="b" onclick="setColorLabel('b',this)"></span>
+        <span class="cl-dot" style="background:#9040c0" data-lbl="p" onclick="setColorLabel('p',this)"></span>
+        <span class="cl-dot" style="background:var(--bg3);border:1px dashed var(--border2)" data-lbl="" onclick="setColorLabel('',this)" title="Clear">×</span>
+      </div>
+      <div class="tags-row">
+        <div id="active-tags" class="active-tags"></div>
+        <button class="tag-add-btn" onclick="openTagInput()">+</button>
+        <div class="tag-input-wrap hidden" id="tag-input-wrap"><input id="tag-inp" class="tag-inp" maxlength="20" onkeydown="tagKeydown(event)" placeholder="#tag"/><div id="tag-suggestions" class="tag-sugg hidden"></div></div>
+      </div>
+      <div class="linked-row" id="linked-row"><div id="active-links" class="active-links"></div><button class="link-add-btn" onclick="openLinkPanel()">🔗 <span data-i="linkEntry"></span></button></div>
+      <div class="wtb">
+        <div class="wtb-fmt">
+          <button class="wfb" onclick="fmtMD('**','**')"><strong>B</strong></button>
+          <button class="wfb" onclick="fmtMD('*','*')"><em>I</em></button>
+          <button class="wfb" onclick="fmtMD('~~','~~')"><del>S</del></button>
+          <button class="wfb" onclick="fmtMD('`','`')"><code>&lt;/&gt;</code></button>
+          <button class="wfb" onclick="fmtLine('# ')">H1</button>
+          <button class="wfb" onclick="fmtLine('## ')">H2</button>
+          <button class="wfb" onclick="fmtLine('- ')">•</button>
+          <button class="wfb" onclick="fmtLine('- [ ] ')">☐</button>
+          <button class="wfb" onclick="fmtLine('> ')">"</button>
+        </div>
+        <div class="wtb-right">
+          <div class="font-sel">
+            <button class="wf active" data-f="syne" onclick="setF('syne',this)">Ss</button>
+            <button class="wf" data-f="serif" onclick="setF('serif',this)" style="font-family:'Instrument Serif',serif;font-style:italic">Ss</button>
+            <button class="wf" data-f="mono" onclick="setF('mono',this)" style="font-family:'JetBrains Mono',monospace;font-size:11px">Ss</button>
+            <button class="wf" data-f="inter" onclick="setF('inter',this)" style="font-family:'Inter',sans-serif;font-weight:300">Ss</button>
+          </div>
+          <button class="wtb-stk" onclick="toggleStk()">✦</button>
+        </div>
+      </div>
+      <div id="wp-stk-row" class="wp-stk-row"></div>
+      <textarea id="wbody" class="wbody font-syne" oninput="autoDraft()"></textarea>
+      <div class="wc-live" id="wc-live"></div>
+      <div class="wph-bar">
+        <label class="wph-add" for="wph-inp"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg> Photo</label>
+        <input type="file" id="wph-inp" accept="image/*" multiple class="hidden" onchange="addPhotos(event)"/>
+        <div id="wph-thumbs" class="wph-thumbs"></div>
+      </div>
+      <div class="wrem-bar"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><input type="time" id="wrem" class="wrem-inp"/><button class="wrem-btn" onclick="setRem()" id="wrem-btn"></button><span id="wrem-st" class="wrem-st"></span></div>
+      
+      
+      <div class="audio-section" id="audio-section">
+        <button class="audio-rec-btn" id="audio-rec-btn" onclick="toggleAudioRec()">
+          <div class="audio-waves hidden" id="audio-waves"><span></span><span></span><span></span><span></span><span></span></div>
+          <svg id="audio-mic-ico" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+          <span id="audio-rec-lbl" data-i="audioRecord"></span>
+          <span id="audio-rec-time" class="audio-timer" style="margin-left:auto"></span>
+        </button>
+        <div class="audio-player hidden" id="audio-player-wrap">
+          <audio id="audio-playback" controls></audio>
+          <div class="audio-timer"><span id="audio-size"></span><button class="audio-del" onclick="deleteAudio()">🗑 <span data-i="audioDelete"></span></button></div>
+        </div>
+      </div>
+      <div class="extra-bars">
+        <button class="ebar-btn" onclick="addLocation()" id="loc-btn">📍 <span data-i="locationAdd"></span></button>
+        <span class="ebar-info hidden" id="loc-info"></span>
+        <button class="ebar-btn" onclick="addWeather()" id="wx-btn">🌤 <span data-i="weatherAdding" style="display:none"></span><span class="wx-data" id="wx-data">Ob-havo</span></button>
+        <button class="ebar-btn" onclick="openMusicInput()" id="music-btn">🎵 <span id="music-lbl">Musiqa</span></button>
+      </div>
+      <div class="wpm-bar" id="wpm-bar"><span class="wpm-ico">⌨️</span><span id="wpm-live">0</span> <span data-i="wpmLive"></span><span class="wpm-best" id="wpm-best"></span></div>
+      <div class="wacts">
+        <button class="wa wdel hidden" id="wdel" onclick="delEntry()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/></svg></button>
+        <button class="wa wpdf" onclick="exportPDF()" title="PDF">📄</button>
+        <button class="wa wai-title" onclick="aiAutoTitle()" title="AI Title">🤖✍️</button>
+        <button class="wa wsh" onclick="shareEntry()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+        <button class="wa wsv" id="wsv" onclick="saveEntry()"></button>
+      </div>
+    </div>
+    <div id="wp-preview" class="wp wp-prev hidden">
+      <div class="prev-meta"><span class="prev-date" id="prev-date"></span><span class="prev-mood" id="prev-mood"></span></div>
+      <h1 class="prev-title" id="prev-title"></h1>
+      <div class="prev-tags" id="prev-tags"></div>
+      <div class="prev-links" id="prev-links"></div>
+      <div class="prev-body md-body" id="prev-body"></div>
+      <div class="prev-photos" id="prev-photos"></div>
+    </div>
+    <div id="stk-panel" class="stk-panel hidden"></div>
+  </section>
+
+  <!-- FOLDERS -->
+  <section id="sc-cats" class="sc"><div class="cats-pg"><div class="cat-add"><input id="ncat" class="ncat-i" maxlength="30" onkeydown="if(event.key==='Enter')addCat()"/><button class="ncat-b" onclick="addCat()" id="ncat-btn"></button></div><div id="cat-list" class="cat-list"></div></div></section>
+
+  <!-- STATS -->
+  <section id="sc-stats" class="sc"><div class="stats-pg">
+    <div class="kpis">
+      <div class="kpi"><span class="kv" id="k1">0</span><span class="kl" id="k1l"></span></div>
+      <div class="kpi"><span class="kv" id="k2">0</span><span class="kl" id="k2l"></span></div>
+      <div class="kpi"><span class="kv" id="k3">0🔥</span><span class="kl" id="k3l"></span></div>
+      <div class="kpi"><span class="kv" id="k4">0</span><span class="kl" id="k4l"></span></div>
+    </div>
+    <div class="kpis kpis2">
+      <div class="kpi kpi-wide"><span class="kv" id="k5">0</span><span class="kl" id="k5l"></span></div>
+      <div class="kpi kpi-wide"><span class="kv" id="k6">0</span><span class="kl" id="k6l"></span></div>
+    </div>
+    <div class="ssec"><div class="sst" id="sst1"></div><svg id="wchart-svg" class="wchart-svg" viewBox="0 0 280 80" preserveAspectRatio="none"></svg></div>
+    <!-- MOOD CHART - NEW -->
+    <div class="ssec"><div class="sst" id="sst-mood-chart"></div><div id="mood-monthly-wrap"></div><div id="mood-trend-lbl" class="mood-trend-lbl"></div></div>
+    <div class="ssec"><div class="sst" id="sst2"></div><div class="mt-line" id="mtl"></div></div>
+    <div class="ssec"><div class="sst" id="sst3"></div><div id="cbars" class="cbars"></div></div>
+    <div class="ssec"><div class="sst" id="sst4"></div><div id="toplist" class="toplist"></div></div>
+    <!-- WRITE TIME STATS - NEW -->
+    <div class="ssec"><div class="sst" id="sst-wt"></div><div id="wt-stat-cards" class="wt-cards"></div></div>
+    <div class="ssec"><div class="sst" id="sst5"></div><div id="tag-cloud" class="tag-cloud"></div></div>
+  
+    <div class="ssec"><div class="sst" id="sst-heatmap"></div><div class="heatmap-wrap" id="heatmap-wrap"></div></div>
+    <div class="ssec"><div class="sst" id="sst-radar"></div><div class="radar-wrap" id="radar-wrap"></div></div>
+    <div class="ssec"><div class="sst" id="sst-wfreq"></div><div class="wfreq-list" id="wfreq-list"></div></div>
+    <div class="ssec"><div class="sst" id="sst-emotion"></div><div class="emotion-map" id="emotion-map"></div></div>
+  </div></section>
+
+  <!-- SETTINGS -->
+  <section id="sc-settings" class="sc"><div class="set-pg">
+    <div class="prof-hero">
+      <div class="pav-wrap"><div class="pav" id="pav"></div><div class="pav-ring"></div></div>
+      <div class="pname" id="pname"></div><div class="puname" id="puname"></div><div class="psince" id="psince"></div><div class="pbadges" id="pbadges"></div>
+    </div>
+    <div class="wg-card"><div class="wgc-l"><div class="wgc-t" id="wgc-t"></div><div class="wgc-s" id="wgc-s"></div></div><div class="wgc-r"><input type="number" id="wg-inp" class="wg-inp" min="50" max="5000" step="50"/><button class="wg-btn" onclick="saveWordGoal()" id="wg-btn"></button></div></div>
+    <div class="slist">
+      <div class="sg" id="sg-appearance"></div>
+      <div class="si" onclick="showThemePanel()"><span class="siico">🎨</span><div class="sib"><div class="sil" id="si-theme"></div><div class="sis" id="si-theme-val"></div></div><span class="sia">›</span></div>
+      <div class="si" onclick="showLangPanel()"><span class="siico">🌐</span><div class="sib"><div class="sil" id="si-lang"></div><div class="sis" id="si-lang-val"></div></div><span class="sia">›</span></div>
+
+      <div class="sg" id="sg-security"></div>
+      <div class="si" onclick="openChPass()"><span class="siico">🔑</span><div class="sib"><div class="sil" id="si-chpass"></div><div class="sis" id="si-chpass-sub"></div></div><span class="sia">›</span></div>
+      <div class="si" onclick="openPinMgr()"><span class="siico">🔢</span><div class="sib"><div class="sil">PIN</div><div class="sis" id="si-pin-sub"></div></div><span class="sia">›</span></div>
+      <div class="si"><span class="siico">⏱</span><div class="sib"><div class="sil" id="si-al"></div><div class="sis" id="si-al-sub"></div></div><label class="tog"><input type="checkbox" id="togtog" onchange="togAL()"/><span class="togs"></span></label></div>
+
+      <div class="sg">🎂 <span data-i="bdaySection"></span></div>
+      <div class="si" onclick="openM('m-bday')"><span class="siico">🎂</span><div class="sib"><div class="sil" data-i="birthdayTracker"></div><div class="sis" id="si-bday-val"></div></div><span class="sia">›</span></div>
+      
+        <div class="sg">🤖 AI Funksiyalar</div>
+        <div class="si" onclick="aiWeekSummary()"><span class="siico">📋</span><div class="sib"><div class="sil" data-i="aiWeekSummary"></div><div class="sis">Haftalik xulosa</div></div><span class="sia">›</span></div>
+        <div class="si" onclick="aiEmotionAnalysis()"><span class="siico">💙</span><div class="sib"><div class="sil" data-i="aiEmotionMap"></div><div class="sis">Tuyg'u tahlili</div></div><span class="sia">›</span></div>
+        <div class="si" onclick="aiWritingStyleAnalysis()"><span class="siico">✍️</span><div class="sib"><div class="sil" data-i="aiWritingStyle"></div><div class="sis">Uslub tahlili</div></div><span class="sia">›</span></div>
+        <div class="si" onclick="openStreakFreeze()"><span class="siico">🧊</span><div class="sib"><div class="sil" data-i="streakFreeze"></div><div class="sis" id="si-freeze-val"></div></div><span class="sia">›</span></div>
+        <div class="sg">🤖 AI</div>
+      <div class="si" onclick="openAISettings()"><span class="siico">🔑</span><div class="sib"><div class="sil">Gemini API Key</div><div class="sis" id="si-ai-sub"></div></div><span class="sia">›</span></div>
+
+      <div class="sg">☁️ Telegram Sync</div>
+      <div class="si" onclick="openTGSettings()"><span class="siico">⚙️</span><div class="sib"><div class="sil" id="si-tg-lbl"></div><div class="sis" id="si-tg-val"></div></div><span class="sia">›</span></div>
+      <div class="si" onclick="tgBackup()"><span class="siico">📤</span><div class="sib"><div class="sil" id="si-tg-bk"></div></div><span class="sia">›</span></div>
+      <div class="si" onclick="tgRestore()"><span class="siico">📥</span><div class="sib"><div class="sil" id="si-tg-rs"></div></div><span class="sia">›</span></div>
+
+      <div class="sg" id="sg-reminder-sec"></div>
+      <div class="si" onclick="openDailyRem()"><span class="siico">🔔</span><div class="sib"><div class="sil" id="si-dr"></div><div class="sis" id="si-dr-val"></div></div><span class="sia">›</span></div>
+
+      
+        <div class="sg">🔄 Sync va Export</div>
+        <div class="si" onclick="openM('m-qr')"><span class="siico">📲</span><div class="sib"><div class="sil" data-i="syncQR"></div></div><span class="sia">›</span></div>
+        <div class="si" onclick="openM('m-widget')"><span class="siico">📱</span><div class="sib"><div class="sil" data-i="widgetSetup"></div></div><span class="sia">›</span></div>
+        <div class="si" onclick="exportMarkdown()"><span class="siico">📝</span><div class="sib"><div class="sil" data-i="exportMarkdown"></div></div><span class="sia">›</span></div>
+        <div class="sg" id="sg-data"></div>
+      <div class="si" onclick="expBackup()"><span class="siico">📤</span><div class="sib"><div class="sil" id="si-save-bk"></div></div><span class="sia">›</span></div>
+      <div class="si" onclick="document.getElementById('impf').click()"><span class="siico">📥</span><div class="sib"><div class="sil" id="si-load-bk"></div></div><span class="sia">›</span></div>
+      <input type="file" id="impf" accept=".json" class="hidden" onchange="impBackup(event)"/>
+
+      <div class="sg" id="sg-users"></div>
+      <div class="si" onclick="showUsers()"><span class="siico">👥</span><div class="sib"><div class="sil" id="si-users"></div><div class="sis" id="si-users-val"></div></div><span class="sia">›</span></div>
+
+      <div class="sg danger-sg" id="sg-danger"></div>
+      <div class="si danger-si" onclick="delAccount()"><span class="siico">🗑</span><div class="sib"><div class="sil" id="si-del-acc" style="color:var(--danger)"></div></div><span class="sia" style="color:var(--danger)">›</span></div>
+    </div>
+    <button class="logout-btn" id="logout-btn" onclick="doLogout()"></button>
+    <div class="ver-lbl">Daftar v11 · AI · PDF · Voice · TG · PWA</div>
+  </div></section>
+
+  <nav class="bnav">
+    <button class="nb active" id="nb-home" onclick="openScreen('home')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span id="nb-home-lbl"></span></button>
+    <button class="nb" id="nb-cats" onclick="openScreen('cats')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span id="nb-cats-lbl"></span></button>
+    <button class="nb nb-fab" onclick="newEntry()"><div class="fab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div></button>
+    <button class="nb" id="nb-stats" onclick="openScreen('stats')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span id="nb-stats-lbl"></span></button>
+    <button class="nb" id="nb-settings" onclick="openScreen('settings')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span id="nb-settings-lbl"></span></button>
+  </nav>
+  <button class="qnbtn" onclick="openQN()">✏️</button>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lb" class="lb hidden" onclick="closeLB()"><button class="lbx" onclick="closeLB()">✕</button><button class="lbp" onclick="lbN(-1,event)">‹</button><img id="lbimg" class="lbimg" alt=""/><button class="lbn" onclick="lbN(1,event)">›</button><div class="lbc" id="lbc"></div></div>
+
+<!-- ADV SEARCH -->
+<div id="adv-search" class="adv-search hidden"><div class="as-backdrop" onclick="closeAdvSearch()"></div><div class="as-panel">
+  <div class="as-head"><span id="as-title"></span><button onclick="closeAdvSearch()">✕</button></div>
+  <div class="as-body">
+    <div class="as-field"><label class="as-lbl" id="as-q-lbl"></label><div class="afb"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="as-q" class="afi" type="text"/></div></div>
+    <div class="as-row"><div class="as-field"><label class="as-lbl" id="as-from-lbl"></label><input type="date" id="as-from" class="as-date"/></div><div class="as-field"><label class="as-lbl" id="as-to-lbl"></label><input type="date" id="as-to" class="as-date"/></div></div>
+    <div class="as-field"><label class="as-lbl" id="as-mood-lbl"></label><select id="as-mood" class="wsel w100"><option value="" id="as-mood-any"></option><option value="5">😄</option><option value="4">🙂</option><option value="3">😐</option><option value="2">😔</option><option value="1">😢</option></select></div>
+    <div class="as-field"><label class="as-lbl" id="as-cat-lbl"></label><select id="as-cat" class="wsel w100"></select></div>
+    <div class="as-field"><label class="as-lbl" id="as-tag-lbl"></label><input id="as-tag" class="as-date" type="text" style="width:100%"/></div>
+  </div>
+  <div class="as-foot"><button class="msec" onclick="clearAdvSearch()" id="as-clear"></button><button class="mprim" onclick="runAdvSearch()" id="as-apply"></button></div>
+  <div id="as-results" class="ecards" style="max-height:280px;overflow-y:auto;margin-top:10px;padding:0;"></div>
+</div></div>
+
+<!-- AI PANEL -->
+<div id="ai-panel" class="bot-panel hidden">
+  <div class="bp-head"><span>🤖 <span id="ai-panel-ttl"></span></span><button onclick="hideBotPanel('ai-panel')">✕</button></div>
+  <div class="ai-btns" id="ai-btns">
+    <button class="ai-btn" onclick="aiAction('continue')">▶ <span data-i="aiContinue"></span></button>
+    <button class="ai-btn" onclick="aiAction('rewrite')">↺ <span data-i="aiRewrite"></span></button>
+    <button class="ai-btn" onclick="aiAction('summarize')">≡ <span data-i="aiSummarize"></span></button>
+    <button class="ai-btn" onclick="aiAction('expand')">⤢ <span data-i="aiExpand"></span></button>
+    <button class="ai-btn" onclick="aiAction('translate')">🌐 <span data-i="aiTranslate"></span></button>
+  </div>
+  <div class="ai-custom-row">
+    <input id="ai-custom-inp" class="ai-inp" type="text" onkeydown="if(event.key==='Enter')aiCustom()"/>
+    <button class="ai-send" onclick="aiCustom()">→</button>
+  </div>
+  <div id="ai-thinking" class="ai-thinking hidden"><div class="ai-dots"><span></span><span></span><span></span></div><span id="ai-th-lbl"></span></div>
+  <div id="ai-result-box" class="ai-result-box hidden">
+    <div class="ai-res-lbl" id="ai-res-lbl"></div>
+    <div id="ai-result" class="ai-result md-body"></div>
+    <div class="ai-res-acts"><button class="mprim" onclick="aiInsert()" id="ai-insert-btn"></button><button class="msec ai-regen" onclick="aiRedo()">↺</button></div>
+  </div>
+</div>
+
+<!-- VOICE PANEL -->
+<div id="voice-panel" class="bot-panel hidden">
+  <div class="bp-head"><span>🎙️ <span data-i="voiceNote"></span></span><button onclick="hideBotPanel('voice-panel')">✕</button></div>
+  <div class="voice-body">
+    <button class="voice-mic" id="voice-mic" onclick="toggleVoice()"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></button>
+    <div class="voice-hint" id="voice-hint"></div>
+    <div class="voice-live" id="voice-live"></div>
+    <button class="mprim hidden" id="voice-insert" onclick="insertVoice()"></button>
+  </div>
+</div>
+
+<!-- LINK PANEL -->
+<div id="link-panel" class="bot-panel hidden">
+  <div class="bp-head"><span>🔗 <span data-i="linkEntry"></span></span><button onclick="hideBotPanel('link-panel')">✕</button></div>
+  <input id="link-search-inp" class="mi" style="margin-bottom:8px" oninput="renderLinkSearch(this.value)" placeholder="Qidirish..."/>
+  <div id="link-results" style="max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;"></div>
+</div>
+
+<!-- SCHEDULER MODAL -->
+<div id="m-sched" class="modal hidden" onclick="if(event.target===this)closeM('m-sched')"><div class="mbox">
+  <div class="mttl">🕐 <span id="ms-ttl"></span></div>
+  <input type="datetime-local" id="sched-input" class="mtime"/>
+  <button class="mprim" onclick="saveSchedule()" id="ms-save"></button>
+  <button class="mdanger hidden" id="ms-remove" onclick="removeSchedule()"></button>
+  <button class="msec" onclick="closeM('m-sched')" id="ms-cancel"></button>
+</div></div>
+
+<!-- AI SETTINGS MODAL -->
+<div id="m-ai-key" class="modal hidden" onclick="if(event.target===this)closeM('m-ai-key')"><div class="mbox">
+  <div class="mttl">🤖 Gemini API Key</div>
+  <p class="msub"><a href="https://aistudio.google.com" target="_blank" style="color:var(--accent)">aistudio.google.com</a> — bepul API key</p>
+  <input type="text" id="ai-key-inp" class="mi" placeholder="AIza..."/>
+  <button class="mprim" onclick="saveAIKey()">Saqlash</button>
+  <button class="mdanger" id="ai-key-rm" onclick="removeAIKey()">O'chirish</button>
+  <button class="msec" onclick="closeM('m-ai-key')">Bekor</button>
+</div></div>
+
+<!-- TG SETTINGS MODAL -->
+<div id="m-tg" class="modal hidden" onclick="if(event.target===this)closeM('m-tg')"><div class="mbox">
+  <div class="mttl">☁️ Telegram Sync</div>
+  <p class="msub">@BotFather → yangi bot → token oling. Chat ID olish: @userinfobot ga /start yuboring.</p>
+  <input type="text" id="tg-tok" class="mi" placeholder="123456:ABC-DEF1234ghIkl-..."/>
+  <input type="text" id="tg-cid" class="mi" placeholder="Chat ID: 123456789"/>
+  <button class="mprim" onclick="saveTG()">Saqlash</button>
+  <button class="msec" onclick="closeM('m-tg')">Bekor</button>
+</div></div>
+
+<!-- STANDARD MODALS -->
+<div id="m-chpass" class="modal hidden" onclick="if(event.target===this)closeM('m-chpass')"><div class="mbox"><div class="mttl">🔑 <span id="mcp-ttl"></span></div><input type="password" id="cpold" class="mi" placeholder="Joriy parol"/><input type="password" id="cpnew" class="mi" placeholder="Yangi parol"/><input type="password" id="cpnew2" class="mi" placeholder="Tasdiqlang"/><div class="aerr hidden" id="cperr"></div><button class="mprim" onclick="chPass()" id="mcp-btn"></button><button class="msec" onclick="closeM('m-chpass')" id="mcp-cancel"></button></div></div>
+<div id="m-pin-mgr" class="modal hidden" onclick="if(event.target===this)closeM('m-pin-mgr')"><div class="mbox"><div class="mttl">🔢 PIN</div><input type="password" id="pin1" class="mi pin-i" maxlength="4" inputmode="numeric"/><input type="password" id="pin2" class="mi pin-i" maxlength="4" inputmode="numeric"/><div class="aerr hidden" id="pinerr"></div><button class="mprim" onclick="savePin()" id="mpin-save"></button><button class="mdanger hidden" id="mpin-rem" onclick="removePin()"></button><button class="msec" onclick="closeM('m-pin-mgr')" id="mpin-cancel"></button></div></div>
+<div id="m-daily" class="modal hidden" onclick="if(event.target===this)closeM('m-daily')"><div class="mbox"><div class="mttl">🔔 <span id="mdr-ttl"></span></div><input type="time" id="dtime" class="mtime"/><button class="mprim" onclick="saveDailyR()" id="mdr-save"></button><button class="mdanger hidden" id="mdr-rem" onclick="removeDailyR()"></button><button class="msec" onclick="closeM('m-daily')" id="mdr-cancel"></button></div></div>
+<div id="m-share" class="modal hidden" onclick="if(event.target===this)closeM('m-share')"><div class="mbox"><div class="mttl" id="msh-ttl"></div><div id="shprev" class="shprev"></div><button class="mprim" onclick="doShare()" id="msh-share"></button><button class="msec" onclick="copyShare()" id="msh-copy"></button><button class="msec" onclick="closeM('m-share')" id="msh-close"></button></div></div>
+<div id="m-quick" class="modal hidden" onclick="if(event.target===this)closeM('m-quick')"><div class="mbox"><div class="mttl" id="mqn-ttl"></div><textarea id="qtxt" class="mtarea"></textarea><button class="mprim" onclick="saveQN()" id="mqn-save"></button><button class="msec" onclick="closeM('m-quick')" id="mqn-cancel"></button></div></div>
+<div id="m-users" class="modal hidden" onclick="if(event.target===this)closeM('m-users')"><div class="mbox"><div class="mttl" id="mu-ttl"></div><div id="ulist" class="ulist"></div><button class="msec" onclick="closeM('m-users')" id="mu-close"></button></div></div>
+
+<!-- PIN -->
+<div id="pin-overlay" class="pin-overlay hidden"><div class="pin-box"><div class="pin-ico">🔒</div><div class="pin-title" id="pin-title"></div><div class="pin-dots" id="pin-dots"><span class="pd"></span><span class="pd"></span><span class="pd"></span><span class="pd"></span></div><div class="pin-keypad"><button class="pk" onclick="pinKey('1')">1</button><button class="pk" onclick="pinKey('2')">2</button><button class="pk" onclick="pinKey('3')">3</button><button class="pk" onclick="pinKey('4')">4</button><button class="pk" onclick="pinKey('5')">5</button><button class="pk" onclick="pinKey('6')">6</button><button class="pk" onclick="pinKey('7')">7</button><button class="pk" onclick="pinKey('8')">8</button><button class="pk" onclick="pinKey('9')">9</button><button class="pk pk-clr" onclick="pinKey('C')">⌫</button><button class="pk" onclick="pinKey('0')">0</button><button class="pk pk-cancel" onclick="closePinOverlay()">✕</button></div><div class="pin-err hidden" id="pin-err"></div></div></div>
+
+<!-- THEME / LANG -->
+<div id="theme-panel" class="side-panel hidden"><div class="spanel-head" id="sp-theme-head"></div><div class="theme-opts"><button class="topt" onclick="setTheme('earthy')"><div class="tsw" style="background:linear-gradient(135deg,#111a10,#2a3a1f)"></div><span>Earthy Dark</span></button><button class="topt" onclick="setTheme('slate')"><div class="tsw" style="background:linear-gradient(135deg,#0f1117,#1c2333)"></div><span>Slate Night</span></button><button class="topt" onclick="setTheme('warm')"><div class="tsw" style="background:linear-gradient(135deg,#1a1208,#2e2010)"></div><span>Warm Dark</span></button><button class="topt" onclick="setTheme('light')"><div class="tsw" style="background:linear-gradient(135deg,#f5f5f0,#eaeae0);border:1px solid #ccc"></div><span>Clean Light</span></button><button class="topt" onclick="setTheme('ocean')"><div class="tsw" style="background:linear-gradient(135deg,#071520,#0d2235)"></div>
+    <div class="theme-opts-row2" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+      <button class="topt" onclick="setTheme('neon')"><div class="tsw" style="background:linear-gradient(135deg,#050812,#0a1535)"></div><span>Neon Night</span></button>
+      <button class="topt" onclick="setTheme('rose')"><div class="tsw" style="background:linear-gradient(135deg,#1a0812,#3a1020)"></div><span>Rose</span></button>
+      <button class="topt" onclick="setTheme('forest')"><div class="tsw" style="background:linear-gradient(135deg,#041208,#0e2414)"></div><span>Forest</span></button>
+      <button class="topt" onclick="setTheme('galaxy')"><div class="tsw" style="background:linear-gradient(135deg,#080412,#180c2e)"></div><span>Galaxy</span></button>
+      <button class="topt" onclick="setTheme('sand')"><div class="tsw" style="background:linear-gradient(135deg,#1a1408,#2e2414)"></div><span>Sand</span></button>
+    </div><span>Deep Ocean</span></button></div>
+    <div class="theme-opts-row2" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+      <button class="topt" onclick="setTheme('neon')"><div class="tsw" style="background:linear-gradient(135deg,#050812,#0a1535)"></div><span>Neon Night</span></button>
+      <button class="topt" onclick="setTheme('rose')"><div class="tsw" style="background:linear-gradient(135deg,#1a0812,#3a1020)"></div><span>Rose</span></button>
+      <button class="topt" onclick="setTheme('forest')"><div class="tsw" style="background:linear-gradient(135deg,#041208,#0e2414)"></div><span>Forest</span></button>
+      <button class="topt" onclick="setTheme('galaxy')"><div class="tsw" style="background:linear-gradient(135deg,#080412,#180c2e)"></div><span>Galaxy</span></button>
+      <button class="topt" onclick="setTheme('sand')"><div class="tsw" style="background:linear-gradient(135deg,#1a1408,#2e2414)"></div><span>Sand</span></button>
+    </div><button class="sp-close" onclick="hideSidePanel('theme-panel')">✕</button></div>
+<div id="lang-panel" class="side-panel hidden"><div class="spanel-head" id="sp-lang-head"></div><div class="lang-opts"><button class="lopt" onclick="setLang('uz')"><span class="flag">🇺🇿</span><span>O'zbek</span><span class="lcheck" id="lch-uz">✓</span></button><button class="lopt" onclick="setLang('ru')"><span class="flag">🇷🇺</span><span>Русский</span><span class="lcheck" id="lch-ru"></span></button><button class="lopt" onclick="setLang('en')"><span class="flag">🇬🇧</span><span>English</span><span class="lcheck" id="lch-en"></span></button></div><button class="sp-close" onclick="hideSidePanel('lang-panel')">✕</button></div>
+
+<canvas id="confetti-canvas" class="confetti-canvas hidden"></canvas>
+
+<!-- TEMPLATES MODAL -->
+<div id="m-templates" class="modal hidden" onclick="if(event.target===this)closeM('m-templates')">
+  <div class="mbox">
+    <div class="mttl">📋 <span data-i="templateGallery"></span></div>
+    <div class="tmpl-grid" id="tmpl-grid"></div>
+    <button class="msec" onclick="closeM('m-templates')" style="margin-top:12px">Yopish</button>
+  </div>
+</div>
+
+<!-- QR SYNC MODAL -->
+<div id="m-qr" class="modal hidden" onclick="if(event.target===this)closeM('m-qr')">
+  <div class="mbox">
+    <div class="mttl">📲 <span data-i="syncQR"></span></div>
+    <div class="qr-wrap">
+      <canvas id="qr-canvas" class="qr-canvas" width="180" height="180"></canvas>
+      <div class="qr-hint" id="qr-hint"></div>
+      <div class="sync-data-box" id="sync-data-box"></div>
+    </div>
+    <div style="display:flex;gap:6px;margin-top:12px">
+      <button class="mprim" onclick="genQR()" style="flex:1" data-i="syncGenQR"></button>
+      <button class="msec" onclick="copyDataToClipboard()" style="flex:1" data-i="syncCopy"></button>
+    </div>
+    <button class="msec" onclick="closeM('m-qr')" style="margin-top:8px;width:100%">Yopish</button>
+  </div>
+</div>
+
+<!-- WIDGET PREVIEW MODAL -->
+<div id="m-widget" class="modal hidden" onclick="if(event.target===this)closeM('m-widget')">
+  <div class="mbox">
+    <div class="mttl">📱 <span data-i="widgetSetup"></span></div>
+    <p class="msub">PWA widget ko'rinishi (bosh ekranga qo'shish)</p>
+    <div class="widget-preview" id="widget-preview-box"></div>
+    <button class="mprim" onclick="copyWidgetHTML()" style="margin-top:12px;width:100%">HTML nusxa olish</button>
+    <button class="msec" onclick="closeM('m-widget')" style="margin-top:6px;width:100%">Yopish</button>
+  </div>
+</div>
+
+<!-- AI COACH MODAL -->
+<div id="m-ai-coach" class="modal hidden" onclick="if(event.target===this)closeM('m-ai-coach')">
+  <div class="mbox">
+    <div class="mttl">🤖 <span id="ai-coach-ttl"></span></div>
+    <div id="ai-coach-thinking" class="ai-thinking hidden"><div class="ai-dots"><span></span><span></span><span></span></div></div>
+    <div id="ai-coach-result" class="ai-result md-body" style="max-height:320px;overflow-y:auto;font-size:13px;line-height:1.7;"></div>
+    <button class="msec" onclick="closeM('m-ai-coach')" style="margin-top:12px;width:100%">Yopish</button>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<!-- BIRTHDAY TRACKER -->
+<div id="m-bday" class="modal hidden" onclick="if(event.target===this)closeM('m-bday')">
+  <div class="mbox mbox-wide">
+    <div class="mttl">🎂 <span data-i="birthdayTracker"></span></div>
+    <div class="bday-add-row">
+      <input id="bday-name" class="mi" style="flex:1" placeholder="Ism"/>
+      <input id="bday-date" class="mi" type="date" style="width:140px"/>
+      <button class="mprim" onclick="addBday()" style="white-space:nowrap">+ <span data-i="bdayAdd"></span></button>
+    </div>
+    <div id="bday-list" class="bday-list"></div>
+    <button class="msec" onclick="closeM('m-bday')" style="margin-top:10px">OK</button>
+  </div>
+</div>
+
+<!-- MUSIC INPUT -->
+<div id="m-music" class="modal hidden" onclick="if(event.target===this)closeM('m-music')">
+  <div class="mbox">
+    <div class="mttl">🎵 <span data-i="musicLabel"></span></div>
+    <input id="music-inp" class="mi" placeholder="Artist — Song name"/>
+    <button class="mprim" onclick="saveMusic()">+ <span data-i="musicAdd"></span></button>
+    <button class="msec" onclick="closeM('m-music')">Bekor</button>
+  </div>
+</div>
+
+<!-- AI DAILY QUESTION -->
+<div id="m-ai-q" class="modal hidden" onclick="if(event.target===this)closeM('m-ai-q')">
+  <div class="mbox">
+    <div class="mttl">🧠 <span data-i="aiQuestion"></span></div>
+    <div class="ai-q-text" id="ai-q-text"></div>
+    <textarea id="ai-q-ans" class="mtarea" rows="4"></textarea>
+    <button class="mprim" onclick="saveAIQ()">Saqlash</button>
+    <button class="msec" onclick="closeM('m-ai-q')" data-i="aiQSkip"></button>
+  </div>
+</div>
+
+<script src="crypto-util.js"></script>
+<script src="i18n.js"></script>
+<script src="markdown.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
